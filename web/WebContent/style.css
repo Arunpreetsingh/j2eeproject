@@ -1,0 +1,55 @@
+
+@media only screen and (min-width: 700px){
+body {
+	background-image: url("background-blur-clean-531880.jpg");
+}
+}
+@media only screen and (max-width: 700px){
+body {
+	background-color: fuchsia;
+}
+}
+}
+h1 {
+	font-style: inherit;
+	color: orange;
+}
+div {
+	outline-color: orange;
+	outline-width: thick;
+	
+	
+	
+}
+.search{
+	
+	position: relative;
+	padding-bottom: 5px;
+	margin-top: 8px;
+	border-radius:6px;
+	background-color:transparent;
+}
+.search1{
+	
+	position: relative;
+	padding-bottom: 0px;
+	margin-top: -1px;
+	border-radius:6px;
+	background-color:transparent;
+	border: hidden;
+}
+.submit{
+	width:35px;
+	height:30px;
+	background-image: url("search-btn.png");
+	position: relative;
+	margin-top: 8px;
+	padding-bottom: 15px;
+	background-size: 35px 30px;
+	border:none;
+	cursor:pointer;
+	background-color: white; 
+}
+
+
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div ng-init="product1" >
+
+
+<table class="table table-condenssed table-responsive">
+
+<tr><th>ProductName</th><th>productID</th><th>Cost</th><th>Quantity</th><th>Selling Price</th></tr>
+<tr ng-repeat="pro in product1" ><td >{{pro.name}}</td><td>{{pro.productId}}</td><td>{{pro.cost}}</td><td>{{pro.quantity}}</td><td>{{pro.sellingPrice}}</td></tr>
+
+</table>
+
+</div>
+
+</body>
+</html>
