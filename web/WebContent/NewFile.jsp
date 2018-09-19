@@ -126,36 +126,7 @@
 
 			);
 
-	application.filter('num', function() {
-		return function(numericValue) {
-			if (numericValue == 18) {
-				return "Eighteen";
-			}
-			if (numericValue == 19) {
-				return "Nineteen";
-			}
-			if (numericValue == 20) {
-				return "Twenty";
-			}
-			if (numericValue == 21) {
-				return "Twenty One";
-			}
-			if (numericValue == 22) {
-				return "Twenty Two";
-			}
-			if (numericValue == 23) {
-				return "Twenty Three";
-			}
-			if (numericValue == 24) {
-				return "Twenty Four";
-			}
-			if (numericValue == 25) {
-				return "Twenty Five";
-			}
-
-		};
-
-	});
+	
 
 	function myform() {
 		var xmlhttp;
