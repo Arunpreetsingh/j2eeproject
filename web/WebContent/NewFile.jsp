@@ -288,11 +288,7 @@ for(Cookie cookie : cookies){
 		<form ng-submit="form1.submit();">
 
 			<div class="col-lg-3 col-lg-offset-2" style="color: black;">
-				At Flourish and Blotts we don't just sell books, we sell an
-				experience. In the name of Merlin's beard there is no book that you
-				cannot find here. Witches and wizards, this is your one stop
-				destination for every book there. Even 'The Invisible Book of
-				Invisibility'. Visit us at North Side, Diagon Alley today! <br>
+						<br>
 				<br>
 
 				<div ng-view></div>
@@ -328,7 +324,7 @@ for(Cookie cookie : cookies){
 							class="text-left form-control" id="address" type="text">
 
 					</div>
-					<div align="center" ng-bind="form1.address1"></div>
+				
 
 
 					<div class="form-group">
@@ -339,7 +335,7 @@ for(Cookie cookie : cookies){
 							style="font-weight: bolder;">{{k}}</span><br>
 					</div>
 					</label>
-					<div align="center" ng-bind="form1.sextype1"></div>
+					
 					<div class="form-group">
 						<p class="text-left" style="font-weight: bolder;">Age</p>
 
@@ -347,7 +343,7 @@ for(Cookie cookie : cookies){
 							class="form-control" ng-model="form1.age" required="required">
 
 					</div>
-					<div>{{form1.age | num | uppercase}}</div>
+					
 
 
 
