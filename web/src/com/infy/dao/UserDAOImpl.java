@@ -1,12 +1,20 @@
 package com.infy.dao;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.jws.soap.SOAPBinding.Use;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.infy.bean.Product;
 import com.infy.bean.User;
-
+import com.infy.entity.ProductEntity;
 import com.infy.entity.UserEntity;
 import com.infy.resources.HibernateUtility;
 
@@ -240,4 +248,75 @@ String st=null;
 		
 
 	}
+	
+	@Override
+	public  List<User> getAllCustomerDetails() throws Exception 
+	{
+
+			SessionFactory sessionFactory=null;
+			Session session=null;
+			List<User>userlist = new LinkedList<>();
+			
+			try{
+				
+				sessionFactory=HibernateUtility.createSessionFactory();
+			
+				session=sessionFactory.openSession();
+				
+				String hql="select ce from UserEntity ce where ce.userRole=?";
+				
+			
+				
+				Query query=session.createQuery(hql);
+				
+				query.setString(0,"C");
+				
+				
+				List<UserEntity> userEntities=query.list();
+				
+
+				
+				
+				for (int i = 0; i <userEntities.size(); i++) 
+				{
+					User user= new User();
+			user.setUserId(userEntities.get(i).getUserId());
+			user.setEmail(userEntities.get(i).getEmail());
+			user.setUserName(userEntities.get(i).getUserName());
+			user.setAddress(userEntities.get(i).getAddress());
+			user.setGender(userEntities.get(i).getGender().toString());
+			user.setMobileNumber(userEntities.get(i).getMobileNumber());
+			
+				 userlist.add(user);
+					
+					
+					
+					
+				}
+				
+				
+				
+			
+				
+
+		} catch (HibernateException e) {
+			DOMConfigurator.configure("src/com/infy/resources/log4j.xml");
+			Logger logger=Logger.getLogger(this.getClass());
+			logger.debug(e.getMessage(),e);
+			throw new Exception("DAO.TECHINAL_ERROR");
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			throw exception;
 }
+		finally {
+			
+			if (session.isOpen() || session != null) {
+				session.close();
+			}
+		}
+			return userlist;
+}
+	
+}
+
+

@@ -1,10 +1,14 @@
 package com.infy.business.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
+import com.infy.bean.Product;
 import com.infy.bean.User;
 import com.infy.business.validator.UserValidator;
+import com.infy.dao.ProductDAO;
 import com.infy.dao.UserDAO;
 import com.infy.resources.Factory;
 
@@ -180,5 +184,29 @@ catch (Exception e) {
 			// TODO: handle exception
 		}
 		
+	}
+	@Override
+	public  List<User> getAllCustomerDetails() throws Exception
+	{
+		try
+		{
+			UserDAO userDAO= Factory.createUserDAO();
+			List<User> user = userDAO.getAllCustomerDetails();
+			
+			if(user==null)
+				throw new Exception("Service.USER_NOT_FOUND");
+			return user;
+		}
+		catch(Exception e)
+		{
+			
+			if(e.getMessage().contains("Service"))
+			{
+				DOMConfigurator.configure("src/com/infy/resources/log4j.xml");
+				Logger logger = Logger.getLogger(this.getClass());
+				logger.error(e.getMessage(), e);
+			}
+			throw e;
+		}
 	}
 }

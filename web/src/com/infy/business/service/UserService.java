@@ -2,6 +2,8 @@ package com.infy.business.service;
 
 
 
+import java.util.List;
+
 import com.infy.bean.User;
 
 public interface UserService
@@ -11,4 +13,5 @@ public interface UserService
 	public void changePassword(String userId, String oldPassword, String newPassword) throws Exception;
 	public User findUser(String userId) throws Exception;
 	public void deleteUser(String userId) throws Exception;
+	public  List<User> getAllCustomerDetails() throws Exception;
 }

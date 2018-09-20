@@ -44,7 +44,9 @@ public class UserInterface
 		//deleteProduct();
 			
 		//getProductDetails();
-			getAllProductDetails();
+			//getAllProductDetails();
+			getAllCustomerDetails();
+			
 		}
 		finally{
 			
@@ -274,4 +276,33 @@ public class UserInterface
 			System.out.println(AppConfig.PROPERTIES.getProperty(e.getMessage()));
 		}
 	}
+	
+	public static void getAllCustomerDetails()
+	{
+		
+		try
+		{
+			List<User> user = userService.getAllCustomerDetails();
+			
+			for (int i = 0; i < user.size(); i++) {
+				
+			
+			System.out.println("User Details:\n=============");
+			System.out.println("User ID: " + user.get(i).getUserId());
+			System.out.println("Username: " + user.get(i).getUserName());
+			System.out.println("e-mail: " + user.get(i).getEmail());
+			System.out.println("Mobile: " + user.get(i).getMobileNumber());
+		
+			System.out.println("Gender: " + user.get(i).getGender());
+			
+			
+			System.out.println("Address: " + user.get(i).getAddress());
+		}
+		}
+		catch (Exception e)
+		{
+			System.out.println(AppConfig.PROPERTIES.getProperty(e.getMessage()));
+		}
+	}
+
 }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div ng-init="customer" >
+
+
+<table  class="table table-condenssed table-responsive">
+
+<tr><th>CustomerName</th><th>CustomerID</th><th>Mobile</th><th>Address</th><th>Email</th><th>Gender</th></tr>
+<tr ng-repeat="cus in customer" ><td >{{cus.userName}}</td><td>{{cus.userId}}</td><td>{{cus.mobileNumber}}</td><td>{{cus.address}}</td><td>{{cus.email}}</td><td>{{cus.gender}}</td></tr>
+
+</table>
+
+</div>
+
+</body>
+</html>

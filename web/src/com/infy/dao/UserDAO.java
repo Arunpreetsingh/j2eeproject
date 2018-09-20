@@ -1,5 +1,8 @@
 package com.infy.dao;
 
+import java.util.List;
+
+import com.infy.bean.Product;
 import com.infy.bean.User;
 
 public interface UserDAO
@@ -10,4 +13,5 @@ public interface UserDAO
 	public User findUser(String userId) throws Exception;
 	
 	public void deleteUser(String userId) throws Exception;
+	public  List<User> getAllCustomerDetails() throws Exception; 
 }

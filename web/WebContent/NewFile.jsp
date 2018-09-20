@@ -44,6 +44,28 @@
 														.getElementById("message").innerHTML = "Resource not found";
 
 											});
+						}
+							
+							$scope.fetch2 = function() {
+
+								
+
+								$http
+										.get(
+												'http://localhost:8030/web/api/customer/allcustomer')
+										.then(
+												function(response) {
+													$scope.customer = response.data;
+													document
+															.getElementById("message").innerHTML = null;
+
+												},
+												function() {
+
+													document
+															.getElementById("message").innerHTML = "Resource not found";
+
+												});
 
 						}
 						$scope.fetch1 = function() {
@@ -174,6 +196,8 @@
 			templateUrl : 'data1.html'
 		}).when('/data2', {
 			templateUrl : 'data2.html'
+		}).when('/data3', {
+			templateUrl : 'data3.html'
 		}).otherwise({
 			redirectto : '/'
 		});
@@ -231,7 +255,7 @@ for(Cookie cookie : cookies){
 						
 						<% } %>
 					
-					<li><a href="#">Clients</a></li>
+					<li><a href="#data3"><button class="search1" ng-click="customer=fetch2()">Customer</button></a></li>
 					<li><a href="#countries">Details You Entered </a></li>
 
 					<li>
@@ -259,10 +283,8 @@ for(Cookie cookie : cookies){
 		<form ng-submit="form1.submit();">
 
 			<div class="col-lg-3 col-lg-offset-2" style="color: black;">
-						<br>
-				<br>
-
-				<div ng-view></div>
+					
+				<div  ng-view></div>
 
 
 			</div>
