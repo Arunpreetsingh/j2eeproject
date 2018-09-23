@@ -282,7 +282,7 @@ for(Cookie cookie : cookies){
 
 		<form ng-submit="form1.submit();">
 
-			<div class="col-lg-3 col-lg-offset-2" style="color: black;">
+			<div class="col-lg-2 col-lg-offset-1 " style="color: black;">
 					
 				<div  ng-view></div>
 
@@ -290,7 +290,7 @@ for(Cookie cookie : cookies){
 			</div>
 
 
-			<div align="center" class="col-lg-5 col-lg-offset-2 container-fluid">
+			<div align="center" class="col-lg-3 col-lg-offset-6 container-fluid">
 
 
 
