@@ -29,7 +29,7 @@
 
 							$http
 									.get(
-											'http://localhost:8030/web/api/Products/'
+											'http://localhost:8040/web/api/Products/'
 													+ productid)
 									.then(
 											function(response) {
@@ -52,7 +52,7 @@
 
 								$http
 										.get(
-												'http://localhost:8030/web/api/customer/allcustomer')
+												'http://localhost:8040/web/api/customer/allcustomer')
 										.then(
 												function(response) {
 													$scope.customer = response.data;
@@ -74,7 +74,7 @@
 
 							$http
 									.get(
-											'http://localhost:8030/web/api/Products/getallproduct'
+											'http://localhost:8040/web/api/Products/getallproduct'
 													)
 									.then(
 											function(response) {
@@ -368,7 +368,7 @@ for(Cookie cookie : cookies){
 
 			</div>
 
-
+]
 
 
 

@@ -267,7 +267,7 @@ public class ProductDAOImpl implements ProductDAO
 				String hql="select pe from ProductEntity pe";
 				
 				Query query=session.createQuery(hql);
-				
+
 			
 				List<ProductEntity> productEntities=query.list();
 				
