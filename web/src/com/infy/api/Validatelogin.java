@@ -48,9 +48,10 @@ public class Validatelogin extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter  out=response.getWriter();
       
+ 
         		try {
         			
-        			
+        		
         	UserService service=Factory.createUserService();
         	
         	User user=service.findUser(uName);

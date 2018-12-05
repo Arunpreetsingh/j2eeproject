@@ -26,7 +26,7 @@
 						$scope.fetch = function() {
 
 							productid = document.getElementById("ProductId").value
-
+$scope.$emit('LOAD')
 							$http
 									.get(
 											'http://localhost:8040/web/api/Products/'
@@ -34,6 +34,7 @@
 									.then(
 											function(response) {
 												$scope.product = response.data;
+												$scope.$emit('UNLOAD')
 												document
 														.getElementById("message").innerHTML = null;
 
@@ -42,20 +43,21 @@
 
 												document
 														.getElementById("message").innerHTML = "Resource not found";
-
+												$scope.$emit('UNLOAD')
 											});
 						}
 							
 							$scope.fetch2 = function() {
 
 								
-
+								$scope.$emit('LOAD')
 								$http
 										.get(
 												'http://localhost:8040/web/api/customer/allcustomer')
 										.then(
 												function(response) {
 													$scope.customer = response.data;
+													$scope.$emit('UNLOAD')
 													document
 															.getElementById("message").innerHTML = null;
 
@@ -64,14 +66,14 @@
 
 													document
 															.getElementById("message").innerHTML = "Resource not found";
-
+													$scope.$emit('UNLOAD')
 												});
 
 						}
 						$scope.fetch1 = function() {
 
 						
-
+							$scope.$emit('LOAD')
 							$http
 									.get(
 											'http://localhost:8040/web/api/Products/getallproduct'
@@ -79,6 +81,7 @@
 									.then(
 											function(response) {
 												$scope.product1 = response.data;
+												$scope.$emit('UNLOAD')
 												document
 														.getElementById("message").innerHTML = null;
 
@@ -87,7 +90,7 @@
 
 												document
 														.getElementById("message").innerHTML = "Resource not found";
-
+												$scope.$emit('UNLOAD')
 											});
 
 						}
@@ -204,10 +207,14 @@
 
 	} ]);
 	
-	
+	application.controller('loadcontroller',['$scope' ,function($scope){
+		$scope.$on('LOAD',function(){$scope.loader=true});
+		$scope.$on('UNLOAD',function(){$scope.loader=false});
+	}]);
 </script>
 </head>
-<body ng-app="Application">
+<body ng-app="Application" ng-controller="loadcontroller">
+
 <%
 String user = null;
 String usern=(String)session.getAttribute("uName");
@@ -229,7 +236,7 @@ for(Cookie cookie : cookies){
 %>
 
 	<div class="container-fluid" ng-controller="bookingcontroller">
-
+<div ng-show="loader" ><div class ="loader" ></div></div>
 		<h1 align="center">Customer Registration</h1>
 
 
@@ -251,6 +258,7 @@ for(Cookie cookie : cookies){
 						
 						if(usern.equals("A101")){ 
 						%>
+						
 						<li><a href="#data1"><button class="search1" ng-click="product1=fetch1()">All Products</button></a></li>
 						
 						<% } %>
