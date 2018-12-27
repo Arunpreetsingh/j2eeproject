@@ -79,7 +79,7 @@ public class ProductDAOImpl implements ProductDAO
 					session=sessionFactory.openSession();
 					
 					ProductEntity productEntity= new ProductEntity();
-					productEntity.setProductId(product.getProductId());
+					
 					productEntity.setName(product.getName());
 					productEntity.setBrand(product.getBrand());
 					productEntity.setCategory(product.getCategory());
@@ -97,7 +97,7 @@ public class ProductDAOImpl implements ProductDAO
 				
 	}
 				catch (HibernateException e) {
-					e.printStackTrace();
+				
 					DOMConfigurator.configure("src/com/infy/resources/log4j.xml");
 					Logger logger=Logger.getLogger(this.getClass());
 					logger.debug(e.getMessage(),e);

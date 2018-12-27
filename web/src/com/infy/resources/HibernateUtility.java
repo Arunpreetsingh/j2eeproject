@@ -31,7 +31,7 @@ public class HibernateUtility {
 			}
 		} catch (Exception e) {
 			System.err.println("ERROR : HibernateUtility :"+e.getMessage());
-			DOMConfigurator.configure("src/resources/log4j.xml");
+			DOMConfigurator.configure("src/com/infy/resources/log4j.xml");
 			Logger logger = Logger.getLogger(HibernateUtility.class);
 			logger.error(e.getMessage(), e);
 			throw e;

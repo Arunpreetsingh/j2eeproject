@@ -34,7 +34,7 @@ $scope.$emit('LOAD')
 									.then(
 											function(response) {
 												$scope.product = response.data;
-												$scope.$emit('UNLOAD')
+											$scope.$emit('UNLOAD')
 												document
 														.getElementById("message").innerHTML = null;
 
@@ -43,7 +43,7 @@ $scope.$emit('LOAD')
 
 												document
 														.getElementById("message").innerHTML = "Resource not found";
-												$scope.$emit('UNLOAD')
+											$scope.$emit('UNLOAD')
 											});
 						}
 							
@@ -131,19 +131,36 @@ $scope.$emit('LOAD')
 
 						$scope.form1 = {};
 						$scope.form1.name = null;
-						$scope.form1.address1 = null;
-						$scope.form1.sextype1 = null;
-						$scope.form1.country = null;
-
-						$scope.form1.age = null;
+					
+						
+						$scope.form1.userId = null;
+						
+						$scope.form1.userRole = null;
+						$scope.form1.password = null;
+						$scope.form1.email = null;
+						$scope.form1.mobileNumber = null;
+						$scope.form1.dateOfBirth = null;
+						$scope.form1.address = null;
+						$scope.form1.gender = null;
+						$scope.form1.userType = null;
+						$scope.form1.userStatus = null;
+						$scope.form1.message=null
 
 						$scope.form1.submit = function() {
+							
+							
+						
+							console.log($scope.form1.dateOfBirth);
+							var data =angular.toJson($scope.form1);
+							
+							$http.post('http://localhost:8040/web/api/Products' +'/adduser',data ).then(function(response){
+								alert($scope.form1.message = response.data.message);
 
-							alert("NAME-" + $scope.form1.name + "ADDRESS-"
-									+ $scope.form1.address1 + "SEX-"
-									+ $scope.form1.sextype1 + "AGE-"
-									+ $scope.form1.age + "COUNTRY-"
-									+ $scope.form1.country);
+							},function(response){
+								$scope.form1.message = response.data.message;
+
+							});
+							
 
 						};
 
@@ -233,7 +250,7 @@ for(Cookie cookie : cookies){
 	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
 }
 }
-%>
+ %>
 
 	<div class="container-fluid" ng-controller="bookingcontroller">
 <div ng-show="loader" ><div class ="loader" ></div></div>
@@ -253,7 +270,7 @@ for(Cookie cookie : cookies){
 			</div>
 			<div class="collapse navbar-collapse" id="mycollapse">
 				<ul class="nav navbar-nav ">
-					<li class="active"><a href="#">Home</a></li>
+	APLTZTAY				<li class="active"><a href="#">Home</a></li>
 					<% 
 						
 						if(usern.equals("A101")){ 
@@ -305,7 +322,15 @@ for(Cookie cookie : cookies){
 
 				<div class="container-fluid">
 
-
+					
+						<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">ID</p>
+						<input class="text-left form-control" type="text"
+							required="required"
+							oninvalid="setCustomValidity('ID MUST START FROM A OR S OR C');"
+							pattern="(A|S|C)[0-9]*" placeholder="Enter ID" name="ID"
+							id="userId" ng-model="form1.userId">
+					</div>
 
 					<div align="left" class="form-group">
 						<p class="text-left" style="font-weight: bolder;">Name</p>
@@ -321,43 +346,82 @@ for(Cookie cookie : cookies){
 
 					<div align="left" class="form-group">
 						<p class="text-left" style="font-weight: bolder;">Address</p>
-						<input ng-model="form1.address1" name="address1"
+						<input ng-model="form1.address" name="address"
 							class="text-left form-control" id="address" type="text">
 
 					</div>
 				
-
+					<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">Role</p>
+						<input class="text-left form-control" type="text"
+							required="required"
+							oninvalid="setCustomValidity('ADMIN OR SUPPLIER OR CUSTOMER');"
+							pattern="(ADMIN|SUPPLIER|CUSTOMER)" placeholder="Enter Name" name="Name"
+							id="userRole" ng-model="form1.userRole" >
+					</div>
+					
+					<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">Email</p>
+						<input class="text-left form-control" type="text"
+							required="required"
+							
+							 placeholder="Enter Email" name="email"
+							id="email" ng-model="form1.email" >
+					</div>
+					<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">Password</p>
+						<input class="text-left form-control" type="text"
+							required="required"
+							
+							 placeholder="Enter Password" name="password"
+							id="password" ng-model="form1.password" >
+					</div>
 
 					<div class="form-group">
 						<p class="text-left" style="font-weight: bolder;">Sex</p>
 						<label ng-repeat="k in sexlist" class="radio-inline"> <input
-							type="radio" ng-model="form1.sextype1" ng-value="k"
-							name="sextype1" required="required"> <span
+							type="radio" ng-model="form1.gender" ng-value="k"
+							name="gender" required="required"> <span
 							style="font-weight: bolder;">{{k}}</span><br>
 					</div>
 					</label>
 					
-					<div class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Age</p>
-
-						<input type="number" min="18" max="25" name="age"
-							class="form-control" ng-model="form1.age" required="required">
-
+					<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">Mobile</p>
+						<input class="text-left form-control" type="number"
+							required="required"
+							
+							 placeholder="Enter Mobilenumber" name="MobileNumber"
+							id="mobileNumber" ng-model="form1.mobileNumber" >
+					</div>
+					<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">D.O.B</p>
+						<input class="text-left form-control" type="Date"
+							required="required" 							
+							 placeholder="Enter D.O.B" name="dateOfBirth"
+							id="dateOfBirth" ng-model="form1.dateOfBirth" >
 					</div>
 					
 
 
-
-					<div align="left" class="form-group" countrylist=[ng-init=
-						"countrylist.txt"]>
-						<p class="text-left" style="font-weight: bolder;">Country</p>
-						<select class="form-control" name="country"
-							ng-model="form1.country" ng-value="country">
-							<option>--select--</option>
-							<option ng-repeat="country in countrylist">{{country}}</option>
-
-						</select>
+<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">Type</p>
+						<input class="text-left form-control" type="text"
+							required="required"
+							oninvalid="setCustomValidity('GOLD OR SILVER OR PLATINUM');"
+							pattern="(GOLD|SILVER|PLATINUM)" placeholder="Enter UserType" name="Name"
+							id="userType" ng-model="form1.userType" >
 					</div>
+					
+<div align="left" class="form-group">
+						<p class="text-left" style="font-weight: bolder;">User Status</p>
+						<input class="text-left form-control" type="text"
+							required="required"
+							oninvalid="setCustomValidity('A OR D');"
+							pattern="(A|D)" placeholder="Enter UserStatus" name="userStatus6"
+							id="userStatus" ng-model="form1.userStatus" >
+					</div>
+					
 
 					<div align="center" class="form-group">
 						<input class=" btn btn-success" type="submit" value="Submit">

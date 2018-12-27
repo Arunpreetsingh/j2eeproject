@@ -4,7 +4,10 @@ package com.infy.api;
 
 import java.util.List;
 
+import javax.json.Json;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,8 +18,11 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
+import com.google.gson.Gson;
 import com.infy.bean.Product;
+import com.infy.bean.User;
 import com.infy.business.service.ProductService;
+import com.infy.business.service.UserService;
 import com.infy.resources.Factory;
 import com.infy.resources.JSONParser;
 
@@ -120,6 +126,67 @@ e.printStackTrace();
 		
 		
 	}
+	
+	
+	@POST
+	@Path("/adduser")
+	
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response adduser(String dataRecieved)
+	{
+		Gson gson=new Gson();
+		Response result = null;
+        String string = dataRecieved;
+        
+        System.out.println(string);
+    	try {
+			// CODE TO CALL DAO CLASS METHOD FOR GETTING EMPLOYEE DETAILS
+			User user=gson.fromJson(string, User.class);
+			
+		UserService userService=Factory.createUserService();
+		
+		userService.addUser(user);
+		
+			// Converting employee object into JSONBean
+			
+		
+		String message=user.getUserId();
+		
+		// Sends the response as JSON string
+		 
+			result=Response.status(Status.OK).entity(message).build();
+			// Response.status(Status.OK).entity(employeeJson).build();
 
+			// In case of DAO exception, response is sent with status code 503
+			// (SERVICE_UNAVAILABLE)
+			// Exception other than DAO, response is sent with status code 400
+			// BAD_REQUEST
+
+		} catch (Exception e) {
+e.printStackTrace();
+			if (e.getMessage().contains("DAO")) {
+				String error = "{\"message\":\"" + e.getMessage() + "\"}";
+				result = Response.status(Status.SERVICE_UNAVAILABLE).entity(error).build();
+				DOMConfigurator.configure("src/com/infy/resources/log4j.xml");
+				Logger logger = Logger.getLogger(this.getClass());
+				logger.error(e.getMessage(), e);
+			} else {
+				String error = "{\"message\":\"" + e.getMessage() + "\"}";
+				result = Response.status(Status.BAD_REQUEST).entity(error).build();
+				DOMConfigurator.configure("src/com/infy/resources/log4j.xml");
+				Logger logger = Logger.getLogger(this.getClass());
+				logger.error(e.getMessage(), e);
+			}
+		}
+		return result;
+		
+		
+	
+	
+		
+		
+		
+	}
 
 }

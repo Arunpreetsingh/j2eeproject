@@ -2,16 +2,25 @@ package com.infy.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 
 
 
 @Entity
 @Table(name="infyretail_product")
+@GenericGenerator(name="PRODUCT_SEQ", strategy="sequence",
+parameters={@Parameter(name="sequence",value="INFYRETAIL_PRODUCT_SEQ")})
 public class ProductEntity {
 	@Id
 	@Column(name="product_id")
+	
+	@GeneratedValue(generator="PRODUCT_SEQ")
 	private Integer productId;
 	@Column(name="product_name")
 	private String name;

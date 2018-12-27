@@ -45,7 +45,7 @@ public class UserInterface
 			
 		//getProductDetails();
 			//getAllProductDetails();
-			getAllCustomerDetails();
+			//getAllCustomerDetails();
 			
 		}
 		finally{
@@ -71,6 +71,9 @@ public class UserInterface
 		user.setAddress("12, Lakshmikanth Nagar, Mysore, Karnataka, 570027");
 		user.setPassword("@sunnu_");
 		user.setUserStatus('A');
+		
+		
+	
 		try
 		{
 			
@@ -169,7 +172,7 @@ public class UserInterface
 	public static void addProduct()
 	{
 		Product product=new Product();
-		product.setProductId(1004);
+		
 		product.setName("Iphone6+");
 		product.setCategory("Mobile");
 		product.setBrand("Apple");
