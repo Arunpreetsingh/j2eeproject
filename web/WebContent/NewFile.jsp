@@ -155,8 +155,11 @@ $scope.$emit('LOAD')
 						$scope.form1.userStatus = null;
 						
 						$scope.dateOfBirth1=null;
+						
 						$scope.form1.submit = function() {
-							$scope.form1.dateOfBirth.year=	$scope.dateOfBirth1.getFullYear();
+							
+							console.log($scope.form1);
+							$scope.form1.dateOfBirth.year=$scope.dateOfBirth1.getFullYear();
 							$scope.form1.dateOfBirth.month=$scope.dateOfBirth1.getMonth();	
 							$scope.form1.dateOfBirth.dayOfMonth=$scope.dateOfBirth1.getDate();
 							$scope.form1.dateOfBirth.hourOfDay=$scope.dateOfBirth1.getHours();
@@ -164,9 +167,10 @@ $scope.$emit('LOAD')
 							$scope.form1.dateOfBirth.second=$scope.dateOfBirth1.getSeconds();
 							
 							var data =angular.toJson($scope.form1);
-								console.log(data);
+								
 							$http.post('http://localhost:8050/web/api/Products' +'/adduser',data ).then(function(response){
-								alert("ADDED USER_ID-"  document.getElementById("message").innerHTML = response.data);
+								alert("ADDED USER_ID-" + response.data)
+								document.getElementById("message").innerHTML = response.data;
 								
 							},function(response){
 								document.getElementById("message").innerHTML = "Resource not found";;
@@ -222,14 +226,14 @@ $scope.$emit('LOAD')
 
 	}
 	application.config([ '$routeProvider', function($routeProvider) {
-		$routeProvider.when('/countries', {
-			templateUrl : 'Countries.html'
-		}).when('/data1', {
+		$routeProvider.when('/data1', {
 			templateUrl : 'data1.html'
 		}).when('/data2', {
 			templateUrl : 'data2.html'
 		}).when('/data3', {
 			templateUrl : 'data3.html'
+		}).when('/data4', {
+			templateUrl : 'data4.html'
 		}).otherwise({
 			redirectto : '/'
 		});
@@ -289,12 +293,13 @@ for(Cookie cookie : cookies){
 						if(user2.getUserRole().name().equals("ADMIN")){ 
 						%>
 						
-						<li><a href="#data1"><button class="search1" ng-click="product1=fetch1()">All Products</button></a></li>
 						
+						<li><a href="#data3"><button class="search1" ng-click="customer=fetch2()">Customer</button></a></li>
+						<li><a href="#data4" >SIGN UP </a></li>
 						<% } %>
 					
-					<li><a href="#data3"><button class="search1" ng-click="customer=fetch2()">Customer</button></a></li>
-					<li><a href="#countries">Details You Entered </a></li>
+					<li><a href="#data1"><button class="search1" ng-click="product1=fetch1()">All Products</button></a></li>
+					
 
 					<li>
 						<form class="form-inline mr-auto">
@@ -317,149 +322,16 @@ for(Cookie cookie : cookies){
 
 
 		</nav>
-
-		<form ng-submit="form1.submit();">
-
-			<div class="col-lg-2 col-lg-offset-1 " style="color: black;">
+		
+		<div class="col-lg-6 col-lg-offset-2 " style="color: black;">
 					
 				<div  ng-view></div>
 
 
 			</div>
 
-
-			<div align="center" class="col-lg-3 col-lg-offset-6 container-fluid">
-
-
-
-
-				<div class="container-fluid">
-
-					
-						<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">ID</p>
-						<input class="text-left form-control" type="text"
-							required="required"
-							oninvalid="setCustomValidity('ID MUST START FROM A OR S OR C');"
-							pattern="(A|S|C)[0-9]*" placeholder="Enter ID" name="ID"
-							id="userId" ng-model="form1.userId">
-					</div>
-
-					<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Name</p>
-						<input class="text-left form-control" type="text"
-							required="required"
-							oninvalid="setCustomValidity('naam jruri aa prna');"
-							pattern="[a-zA-Z]+" placeholder="Enter Name" name="userName"
-							id="uname" ng-model="form1.userName" onchange="myform();">
-					</div>
-
-
-
-
-					<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Address</p>
-						<input ng-model="form1.address" name="address"
-							class="text-left form-control" id="address" type="text">
-
-					</div>
-				
-					<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Role</p>
-						<input class="text-left form-control" type="text"
-							required="required"
-							oninvalid="setCustomValidity('ADMIN OR SUPPLIER OR CUSTOMER');"
-							pattern="(ADMIN|SUPPLIER|CUSTOMER)" placeholder="Enter Name" name="Name"
-							id="userRole" ng-model="form1.userRole" >
-					</div>
-					
-					<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Email</p>
-						<input class="text-left form-control" type="text"
-							required="required"
-							
-						 placeholder="Enter Email" name="email"
-							id="email" ng-model="form1.email" >
-					</div>
-					<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Password</p>
-						<input class="text-left form-control" type="text"
-							required="required"
-							
-							 placeholder="Enter Password" name="password"
-							id="password" ng-model="form1.password" >
-					</div>
-
-					<div class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Sex</p>
-						<label ng-repeat="k in sexlist" class="radio-inline"> <input
-							type="radio" ng-model="form1.gender" ng-value="k"
-							name="gender" required="required"> <span
-							style="font-weight: bolder;">{{k}}</span><br>
-					</div>
-					</label>
-					
-					<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Mobile</p>
-						<input class="text-left form-control" type="number"
-							required="required"
-							
-							 placeholder="Enter Mobilenumber" name="MobileNumber"
-							id="mobileNumber" ng-model="form1.mobileNumber" >
-					</div>
-					<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">D.O.B</p>
-						<input class="text-left form-control" type="Date"
-							required="required" 							
-							 placeholder="Enter D.O.B" name="dateOfBirth"
-							id="dateOfBirth" ng-model="dateOfBirth1" >
-					</div>
-					
-
-
-<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">Type</p>
-						<input class="text-left form-control" type="text"
-							required="required"
-							oninvalid="setCustomValidity('GOLD OR SILVER OR PLATINUM');"
-							pattern="(GOLD|SILVER|PLATINUM)" placeholder="Enter UserType" name="Name"
-							id="userType" ng-model="form1.userType" >
-					</div>
-					
-<div align="left" class="form-group">
-						<p class="text-left" style="font-weight: bolder;">User Status</p>
-						<input class="text-left form-control" type="text"
-							required="required"
-							oninvalid="setCustomValidity('A OR D');"
-							pattern="(A|D)" placeholder="Enter UserStatus" name="userStatus6"
-							id="userStatus" ng-model="form1.userStatus" >
-					</div>
-					
-
-					<div align="center" class="form-group">
-						<input class=" btn btn-success" type="submit" value="Submit">
-
-					</div>
-
-					<div align="center" class="form-group">
-						<input class=" btn btn-success" type="reset">
-					</div>
-
-
-				</div>
-
-				<div id="message" style="color: blue; font-weight: bolder;"></div>
-
-
-			</div>
-
-
-
-
-
-
-		</form>
 		
+		<div id="message" style="color: blue; font-weight: bolder;"></div>
 	</div>
 
 </body>
