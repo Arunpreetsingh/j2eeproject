@@ -2,7 +2,6 @@ package com.infy.dao;
 
 import java.util.List;
 
-import com.infy.bean.Product;
 import com.infy.bean.User;
 
 public interface UserDAO

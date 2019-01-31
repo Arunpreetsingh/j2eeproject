@@ -3,8 +3,6 @@ package com.infy.dao;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.jws.soap.SOAPBinding.Use;
-
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.hibernate.HibernateException;
@@ -12,9 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.infy.bean.Product;
 import com.infy.bean.User;
-import com.infy.entity.ProductEntity;
 import com.infy.entity.UserEntity;
 import com.infy.resources.HibernateUtility;
 
@@ -286,6 +282,7 @@ String st=null;
 			user.setAddress(userEntities.get(i).getAddress());
 			user.setGender(userEntities.get(i).getGender().toString());
 			user.setMobileNumber(userEntities.get(i).getMobileNumber());
+			user.setDateOfBirth(userEntities.get(i).getDateOfBirth());
 			
 				 userlist.add(user);
 					

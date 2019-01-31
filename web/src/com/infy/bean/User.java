@@ -2,6 +2,12 @@ package com.infy.bean;
 
 import java.util.Calendar;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+import com.google.gson.annotations.JsonAdapter;
+
 /**
  * Bean class to hold the user data
  * @author ETA
@@ -9,12 +15,15 @@ import java.util.Calendar;
 
 public class User {
 	
-	private String userId;
 	private String userName;
+	private String userId;
+	
 	private UserRole userRole;
 	private String password;
 	private String email;
 	private String mobileNumber;
+	
+
 	private Calendar dateOfBirth;
 	private String address;
 	private Gender gender;
@@ -72,6 +81,8 @@ public class User {
 		return dateOfBirth;
 	}
 	public void setDateOfBirth(Calendar dateOfBirth) {
+		
+		
 		this.dateOfBirth = dateOfBirth;
 	}
 	
@@ -105,4 +116,5 @@ public class User {
 			case 'P': this.userType = UserType.PLATINUM; break;
 		}
 	}	
+	
 }

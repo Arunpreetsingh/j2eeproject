@@ -1,3 +1,6 @@
+<%@page import="com.infy.bean.User"%>
+<%@page import="com.infy.business.service.UserServiceImpl"%>
+<%@page import="com.infy.business.service.UserService"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,7 +32,7 @@
 $scope.$emit('LOAD')
 							$http
 									.get(
-											'http://localhost:8040/web/api/Products/'
+											'http://localhost:8050/web/api/Products/'
 													+ productid)
 									.then(
 											function(response) {
@@ -53,10 +56,13 @@ $scope.$emit('LOAD')
 								$scope.$emit('LOAD')
 								$http
 										.get(
-												'http://localhost:8040/web/api/customer/allcustomer')
+												'http://localhost:8050/web/api/customer/allcustomer')
 										.then(
 												function(response) {
 													$scope.customer = response.data;
+													
+													
+													
 													$scope.$emit('UNLOAD')
 													document
 															.getElementById("message").innerHTML = null;
@@ -76,7 +82,7 @@ $scope.$emit('LOAD')
 							$scope.$emit('LOAD')
 							$http
 									.get(
-											'http://localhost:8040/web/api/Products/getallproduct'
+											'http://localhost:8050/web/api/Products/getallproduct'
 													)
 									.then(
 											function(response) {
@@ -130,32 +136,38 @@ $scope.$emit('LOAD')
 										});
 
 						$scope.form1 = {};
-						$scope.form1.name = null;
-					
-						
+						$scope.form1.userName= null;
 						$scope.form1.userId = null;
-						
 						$scope.form1.userRole = null;
 						$scope.form1.password = null;
 						$scope.form1.email = null;
 						$scope.form1.mobileNumber = null;
-						$scope.form1.dateOfBirth = null;
+						$scope.form1.dateOfBirth = {};
+						$scope.form1.dateOfBirth.year=null;
+						$scope.form1.dateOfBirth.month=null;
+						$scope.form1.dateOfBirth.dayOfMonth=null;
+						$scope.form1.dateOfBirth.hourOfDay=null;
+						$scope.form1.dateOfBirth.minute=null;
+						$scope.form1.dateOfBirth.second=null;
 						$scope.form1.address = null;
-						$scope.form1.gender = null;
+						$scope.form1.gender= null;
 						$scope.form1.userType = null;
 						$scope.form1.userStatus = null;
 						$scope.form1.message=null
-
+						$scope.dateOfBirth1=null;
 						$scope.form1.submit = function() {
+							$scope.form1.dateOfBirth.year=	$scope.dateOfBirth1.getFullYear();
+							$scope.form1.dateOfBirth.month=$scope.dateOfBirth1.getMonth();	
+							$scope.form1.dateOfBirth.dayOfMonth=$scope.dateOfBirth1.getDate();
+							$scope.form1.dateOfBirth.hourOfDay=$scope.dateOfBirth1.getHours();
+							$scope.form1.dateOfBirth.minute=$scope.dateOfBirth1.getMinutes();
+							$scope.form1.dateOfBirth.second=$scope.dateOfBirth1.getSeconds();
 							
-							
-						
-							console.log($scope.form1.dateOfBirth);
 							var data =angular.toJson($scope.form1);
-							
-							$http.post('http://localhost:8040/web/api/Products' +'/adduser',data ).then(function(response){
-								alert($scope.form1.message = response.data.message);
-
+								console.log(data);
+							$http.post('http://localhost:8050/web/api/Products' +'/adduser',data ).then(function(response){
+								$scope.form1.message = response.data.message;
+								console.log($scope.form1.message);
 							},function(response){
 								$scope.form1.message = response.data.message;
 
@@ -270,10 +282,11 @@ for(Cookie cookie : cookies){
 			</div>
 			<div class="collapse navbar-collapse" id="mycollapse">
 				<ul class="nav navbar-nav ">
-	APLTZTAY				<li class="active"><a href="#">Home</a></li>
+<li class="active"><a href="#">Home</a></li>
 					<% 
-						
-						if(usern.equals("A101")){ 
+							UserService service= new UserServiceImpl();
+				User user2=	service.findUser(usern);
+						if(user2.getUserRole().name().equals("ADMIN")){ 
 						%>
 						
 						<li><a href="#data1"><button class="search1" ng-click="product1=fetch1()">All Products</button></a></li>
@@ -337,8 +350,8 @@ for(Cookie cookie : cookies){
 						<input class="text-left form-control" type="text"
 							required="required"
 							oninvalid="setCustomValidity('naam jruri aa prna');"
-							pattern="[a-zA-Z]+" placeholder="Enter Name" name="Name"
-							id="uname" ng-model="form1.name" onchange="myform();">
+							pattern="[a-zA-Z]+" placeholder="Enter Name" name="userName"
+							id="uname" ng-model="form1.userName" onchange="myform();">
 					</div>
 
 
@@ -365,7 +378,7 @@ for(Cookie cookie : cookies){
 						<input class="text-left form-control" type="text"
 							required="required"
 							
-							 placeholder="Enter Email" name="email"
+						 placeholder="Enter Email" name="email"
 							id="email" ng-model="form1.email" >
 					</div>
 					<div align="left" class="form-group">
@@ -399,7 +412,7 @@ for(Cookie cookie : cookies){
 						<input class="text-left form-control" type="Date"
 							required="required" 							
 							 placeholder="Enter D.O.B" name="dateOfBirth"
-							id="dateOfBirth" ng-model="form1.dateOfBirth" >
+							id="dateOfBirth" ng-model="dateOfBirth1" >
 					</div>
 					
 

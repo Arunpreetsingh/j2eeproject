@@ -64,6 +64,7 @@ public class UserInterface
 		user.setGender(String.valueOf(Gender.FEMALE));
 		user.setUserId("A101");
 		
+		
 		user.setUserName("Sunnu");
 		user.setEmail("sunnu12343@infy.com");
 		user.setMobileNumber("9876543210");
@@ -71,6 +72,7 @@ public class UserInterface
 		user.setAddress("12, Lakshmikanth Nagar, Mysore, Karnataka, 570027");
 		user.setPassword("@sunnu_");
 		user.setUserStatus('A');
+		
 		
 		
 	

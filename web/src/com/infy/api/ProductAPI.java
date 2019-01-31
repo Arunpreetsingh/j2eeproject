@@ -4,7 +4,7 @@ package com.infy.api;
 
 import java.util.List;
 
-import javax.json.Json;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,12 +19,15 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.infy.bean.Product;
 import com.infy.bean.User;
 import com.infy.business.service.ProductService;
 import com.infy.business.service.UserService;
 import com.infy.resources.Factory;
 import com.infy.resources.JSONParser;
+
+
 
 
 
@@ -137,12 +140,17 @@ e.printStackTrace();
 	{
 		Gson gson=new Gson();
 		Response result = null;
-        String string = dataRecieved;
+       
         
-        System.out.println(string);
+       
     	try {
 			// CODE TO CALL DAO CLASS METHOD FOR GETTING EMPLOYEE DETAILS
-			User user=gson.fromJson(string, User.class);
+    		
+    //	User user=(User) JSONParser.jsonToBean(dataRecieved, User.class);
+    		
+			User user=gson.fromJson(dataRecieved, User.class);
+			
+			
 			
 		UserService userService=Factory.createUserService();
 		

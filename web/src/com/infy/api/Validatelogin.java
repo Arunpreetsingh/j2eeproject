@@ -3,7 +3,6 @@ package com.infy.api;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -17,10 +16,7 @@ import org.apache.log4j.xml.DOMConfigurator;
 
 import com.infy.bean.User;
 import com.infy.business.service.UserService;
-import com.infy.dao.UserDAO;
 import com.infy.resources.Factory;
-
-import javafx.scene.control.Alert;
 
 /**
  * Servlet implementation class Validatelogin
@@ -40,6 +36,7 @@ public class Validatelogin extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		

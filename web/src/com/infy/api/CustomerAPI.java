@@ -2,7 +2,6 @@ package com.infy.api;
 
 import java.util.List;
 
-import javax.json.Json;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,7 +17,6 @@ import com.infy.bean.User;
 
 import com.infy.business.service.UserService;
 import com.infy.resources.Factory;
-import com.infy.resources.JSONParser;
 
 @Path("customer")
 public class CustomerAPI {

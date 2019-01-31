@@ -5,10 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
-import com.infy.bean.Product;
 import com.infy.bean.User;
 import com.infy.business.validator.UserValidator;
-import com.infy.dao.ProductDAO;
 import com.infy.dao.UserDAO;
 import com.infy.resources.Factory;
 
