@@ -135,7 +135,7 @@ e.printStackTrace();
 	@Path("/adduser")
 	
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	
 	public Response adduser(String dataRecieved)
 	{
 		Gson gson=new Gson();
@@ -160,7 +160,7 @@ e.printStackTrace();
 			
 		
 		String message=user.getUserId();
-		
+		System.out.println(message);
 		// Sends the response as JSON string
 		 
 			result=Response.status(Status.OK).entity(message).build();

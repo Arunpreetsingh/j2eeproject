@@ -153,7 +153,7 @@ $scope.$emit('LOAD')
 						$scope.form1.gender= null;
 						$scope.form1.userType = null;
 						$scope.form1.userStatus = null;
-						$scope.form1.message=null
+						
 						$scope.dateOfBirth1=null;
 						$scope.form1.submit = function() {
 							$scope.form1.dateOfBirth.year=	$scope.dateOfBirth1.getFullYear();
@@ -166,10 +166,10 @@ $scope.$emit('LOAD')
 							var data =angular.toJson($scope.form1);
 								console.log(data);
 							$http.post('http://localhost:8050/web/api/Products' +'/adduser',data ).then(function(response){
-								$scope.form1.message = response.data.message;
-								console.log($scope.form1.message);
+								alert("ADDED USER_ID-"  document.getElementById("message").innerHTML = response.data);
+								
 							},function(response){
-								$scope.form1.message = response.data.message;
+								document.getElementById("message").innerHTML = "Resource not found";;
 
 							});
 							
@@ -453,7 +453,7 @@ for(Cookie cookie : cookies){
 
 			</div>
 
-]
+
 
 
 
